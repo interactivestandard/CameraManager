@@ -861,7 +861,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         sessionQueue.async(execute: {
             if let validCaptureSession = self.captureSession {
                 validCaptureSession.beginConfiguration()
-                validCaptureSession.sessionPreset = AVCaptureSession.Preset.high
+                validCaptureSession.sessionPreset = AVCaptureSession.Preset.cif352x288
                 self._updateCameraDevice(self.cameraDevice)
                 self._setupOutputs()
                 self._setupOutputMode(self.cameraOutputMode, oldCameraOutputMode: nil)
@@ -1252,7 +1252,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
     
     fileprivate func _updateCameraQualityMode(_ newCameraOutputQuality: CameraOutputQuality) {
         if let validCaptureSession = captureSession {
-            var sessionPreset = AVCaptureSession.Preset.low
+            var sessionPreset = AVCaptureSession.Preset.cif352x288
             switch (newCameraOutputQuality) {
             case CameraOutputQuality.low:
                 sessionPreset = AVCaptureSession.Preset.cif352x288

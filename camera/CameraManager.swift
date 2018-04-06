@@ -1255,7 +1255,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
             var sessionPreset = AVCaptureSession.Preset.low
             switch (newCameraOutputQuality) {
             case CameraOutputQuality.low:
-                sessionPreset = AVCaptureSession.Preset.low
+                sessionPreset = AVCaptureSession.Preset.cif352x288
             case CameraOutputQuality.medium:
                 sessionPreset = AVCaptureSession.Preset.medium
             case CameraOutputQuality.high:

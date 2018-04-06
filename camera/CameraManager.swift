@@ -774,8 +774,16 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
     }
     
     fileprivate func _getMovieOutput() -> AVCaptureMovieFileOutput {
+        let settings: [String : Any] = [
+          AVVideoCodecKey : AVVideoCodecH264
+        ]
         if let movieOutput = movieOutput, let connection = movieOutput.connection(with: AVMediaType.video),
             connection.isActive {
+            if #available(iOS 10.0, *) {
+              if let output = movieOutput.connection(with: AVMediaType.video) {
+                movieOutput.setOutputSettings(settings, for: output)
+              }
+            }
             return movieOutput
         }
         let newMoviewOutput = AVCaptureMovieFileOutput()
@@ -787,6 +795,11 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
                 captureSession.addOutput(newMoviewOutput)
                 captureSession.commitConfiguration()
             }
+        }
+        if #available(iOS 10.0, *) {
+          if let output = movieOutput?.connection(with: AVMediaType.video) {
+            movieOutput?.setOutputSettings(settings, for: output)
+          }
         }
         return newMoviewOutput
     }
